@@ -101,7 +101,25 @@ const sortByInsert = (input = []) => {
 }
 
 const sortByBubble = (input = []) => {
-  return input
+  const swapElements = (arr, i1, i2) => {
+    const temp = arr[i1]
+    arr[i1] = arr[i2]
+    arr[i2] = temp
+  }
+
+  const doBubbleSort = (arr) => {
+    let swapped = false
+
+    for (let i = 0; i < arr.length - 1; i++) {
+      if (arr[i] <= arr[i + 1]) continue
+      swapped = true
+      swapElements(arr, i, i + 1)
+    }
+
+    return swapped ? doBubbleSort(arr) : arr
+  }
+
+  return doBubbleSort(input.slice())
 }
 
 const sortBySelection = (input = []) => {
