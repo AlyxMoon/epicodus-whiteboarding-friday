@@ -79,7 +79,25 @@ const sortByHeap = (input = []) => {
 }
 
 const sortByInsert = (input = []) => {
-  return input
+  const swapElements = (arr, i1, i2) => {
+    const temp = arr[i1]
+    arr[i1] = arr[i2]
+    arr[i2] = temp
+  }
+
+  const doInsertSort = (arr, index = 0) => {
+    if (index >= arr.length) return arr
+
+    let i = index
+    while (i > 0 && arr[i - 1] > arr[i]) {
+      swapElements(arr, i - 1, i)
+      i--
+    }
+
+    return doInsertSort(arr, index + 1)
+  }
+
+  return doInsertSort(input.slice())
 }
 
 const sortByBubble = (input = []) => {
