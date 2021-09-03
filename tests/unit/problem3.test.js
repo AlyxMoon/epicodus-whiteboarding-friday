@@ -1,6 +1,6 @@
 import solution from '@/lib/problem3'
 
-describe('problem 3', () => {
+describe.only('problem 3', () => {
   const tests = [
     {
       description: 'should work with an empty string',
