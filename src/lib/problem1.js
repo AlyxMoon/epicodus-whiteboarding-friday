@@ -9,8 +9,14 @@ const turnStringsToUrlsIterative = (string) => {
   return result
 }
 
-const turnStringsToUrlsRecursion = (string) => {
-  return string
+const turnStringsToUrlsRecursion = (string, index = 0) => {
+  if (index === string.length) return string
+
+  const char = string[index] === ' ' ? '%20' : string[index]
+  return turnStringsToUrlsRecursion(
+    string.slice(0, index) + char + string.slice(index + 1),
+    index + 1,
+  )
 }
 
 const solution = (input, { recursion = false } = {}) => {
