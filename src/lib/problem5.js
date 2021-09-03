@@ -87,7 +87,25 @@ const sortByBubble = (input = []) => {
 }
 
 const sortBySelection = (input = []) => {
-  return input
+  const swapElements = (arr, i1, i2) => {
+    const temp = arr[i1]
+    arr[i1] = arr[i2]
+    arr[i2] = temp
+  }
+
+  const doSelectionSort = (arr, index = 0) => {
+    if (index === arr.length) return arr
+
+    let minIndex = index
+    for (let i = minIndex + 1; i < arr.length; i++) {
+      if (arr[i] < arr[minIndex]) minIndex = i
+    }
+
+    swapElements(arr, index, minIndex)
+    return doSelectionSort(arr, index + 1)
+  }
+
+  return doSelectionSort(input.slice())
 }
 
 const solution = (input, { type = '' } = {}) => {
