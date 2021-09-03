@@ -42,7 +42,36 @@ const sortByQuick = (input = []) => {
 }
 
 const sortByMerge = (input = []) => {
-  return input
+  const mergeLists = (left, right) => {
+    const result = []
+
+    let [iLeft, iRight] = [0, 0]
+    while (iLeft < left.length && iRight < right.length) {
+      if (left[iLeft] <= right[iRight]) {
+        result.push(left[iLeft])
+        iLeft++
+      } else {
+        result.push(right[iRight])
+        iRight++
+      }
+    }
+
+    for (; iLeft < left.length; iLeft++) result.push(left[iLeft])
+    for (; iRight < right.length; iRight++) result.push(right[iRight])
+
+    return result
+  }
+
+  const doMergeSort = (arr) => {
+    if (arr.length < 2) return arr
+
+    const left = doMergeSort(arr.slice(0, Math.floor(arr.length / 2)))
+    const right = doMergeSort(arr.slice(Math.floor(arr.length / 2)))
+
+    return mergeLists(left, right)
+  }
+
+  return doMergeSort(input.slice())
 }
 
 const sortByHeap = (input = []) => {
