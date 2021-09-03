@@ -75,7 +75,45 @@ const sortByMerge = (input = []) => {
 }
 
 const sortByHeap = (input = []) => {
-  return input
+  const swapElements = (arr, i1, i2) => {
+    const temp = arr[i1]
+    arr[i1] = arr[i2]
+    arr[i2] = temp
+  }
+
+  const makeHeap = (arr, size, index) => {
+    let largestNode = index
+    const leftNode = 2 * index + 1
+    const rightNode = 2 * index + 2
+
+    if (leftNode < size && arr[leftNode] > arr[largestNode]) {
+      largestNode = leftNode
+    }
+
+    if (rightNode < size && arr[rightNode] > arr[largestNode]) {
+      largestNode = rightNode
+    }
+
+    if (largestNode !== index) {
+      swapElements(arr, index, largestNode)
+      makeHeap(arr, size, largestNode)
+    }
+  }
+
+  const doSortByHeap = (arr) => {
+    for (let i = Math.floor(arr.length / 2) - 1; i >= 0; i--) {
+      makeHeap(arr, arr.length, i)
+    }
+
+    for (let i = arr.length - 1; i > 0; i--) {
+      swapElements(arr, 0, i)
+      makeHeap(arr, i, 0)
+    }
+
+    return arr
+  }
+
+  return doSortByHeap(input.slice())
 }
 
 const sortByInsert = (input = []) => {
