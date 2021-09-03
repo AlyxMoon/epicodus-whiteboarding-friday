@@ -11,6 +11,11 @@ const removeDuplicatesIterative = (input) => {
   }
 
   return retval
+
+  // with filter and no lookup table
+  // return input.filter((val, index, arr) => {
+  //   return arr.findIndex(otherVal => otherVal === val) === index
+  // })
 }
 
 const removeDuplicatesRecursion = (input, index = 0, retval = []) => {

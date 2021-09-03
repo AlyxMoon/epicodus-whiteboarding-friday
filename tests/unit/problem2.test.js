@@ -1,6 +1,6 @@
 import solution from '@/lib/problem2'
 
-describe.only('problem 2', () => {
+describe('problem 2', () => {
   describe('iterative', () => {
     it('does not change an empty array', () => {
       expect(solution([])).toEqual([])
